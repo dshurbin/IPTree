@@ -1,0 +1,4 @@
+*.code-workspace
+*.o
+*.so
+*.a

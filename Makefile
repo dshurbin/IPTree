@@ -1,0 +1,17 @@
+CXX = g++
+CXXFLAGS = -Wall -fPIC
+LDFLAGS =
+OBJFILES = ip_tree.o
+TARGET_SHARED = libiptree.so
+TARGET_STATIC = libiptree.a
+
+all: $(TARGET_SHARED) $(TARGET_STATIC)
+
+$(TARGET_SHARED): $(OBJFILES)
+	$(CXX) $(CXXFLAGS) -o $(TARGET_SHARED) $(OBJFILES) $(LDFLAGS) -shared
+
+$(TARGET_STATIC): $(OBJFILES)
+	ar -r $(TARGET_STATIC) $(OBJFILES)
+
+clean:
+	rm -f $(OBJFILES) $(TARGET_SHARED) $(TARGET_STATIC) *~
