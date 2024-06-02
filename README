@@ -1,0 +1,17 @@
+IPTree Library
+
+This small and robust library implements a search functionality over a list of IP addresses
+It is based on AVL tree. Actually this is a Tree-Of-Trees. The first tree represents first IP octet, every
+leaf of the tree has its subtree, representing the second octet of IP and so on.
+First of all it helps to cancel search earlier and not iterating over all space with the addresses.
+You may add individual addresses, and You may add subnets.
+When You adding either an address or a subnet - You provide a handler, which will be called when the address is hit.
+The handler is appends to a handlers chain.
+There is a simple dummy function, wich returns 1, just to implement simple search purposes. Though You
+can use it in an extended way. For example - check IP port or TCP/IP/UDP header/payload contents. Keep
+in mind that each IP can be handled by various handlers - there may be handlers for different subnets, or even
+an exact IP may be handled by multiple functions. F.e. some check ports, some check payload, 
+some check its nature - IP/UDP/ICMP etc.
+every handler has its own unique string (up to 50 characters long), so when adding, we check if we're already here.
+May be it is not the best solution, but this doesn't affect search robustness.
+Anyway - feel free to suggest things to implement.
