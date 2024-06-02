@@ -34,7 +34,6 @@ typedef struct handler_t {
  * node_t describes an IP address tree of trees
 */
 typedef struct node_t {
-//    uint32_t address;               // node current IP address. If it is at the middle, then it's just xx.yy.0.0
     uint8_t key;                    // the octet value itself
     int height;                     // AVL tree height
     struct node_t* left;
@@ -488,7 +487,7 @@ bool add_ip_subnet(std::string subnet, std::string signature, int (*func)(uint32
         mask >>= 1;
         mask |= 0x80000000;
     }
-    //=== all checks and preparations are done here ====
+
     uint8_t key = address >> 24;
     tree = insert_node(tree, key, 0);
     node_t* node = find_node(tree, key);
@@ -500,7 +499,7 @@ bool add_ip_subnet(std::string subnet, std::string signature, int (*func)(uint32
 
     if (bits < 16) {
         uint8_t count = ~((mask >> 16) & 0xff);
-        key = (address >> 16) & 0xff;        // add all possible values of the next (2nd) octet to apply handle
+        key = (address >> 16) & 0xff;
         for (uint8_t i=0; i < count; i++) {
             uint8_t tKey = key | i;
             node->subtree = insert_node(node->subtree, tKey, 0);
@@ -520,7 +519,7 @@ bool add_ip_subnet(std::string subnet, std::string signature, int (*func)(uint32
     }
     if (bits < 24) {
         uint8_t count = ~((mask >> 8) & 0xff);
-        key = (address >> 8) & 0xff;        // add all possible values of the next (3rd) octet to apply handle
+        key = (address >> 8) & 0xff;
         for (uint8_t i=0; i <= count; i++) {
             uint8_t tKey = key | i;
             printf("tKey: %d\n", tKey);
@@ -540,7 +539,7 @@ bool add_ip_subnet(std::string subnet, std::string signature, int (*func)(uint32
         return true;
     }
     uint8_t count = ~(mask & 0xff);
-    key = address & 0xff;                  // add all possible values of the last octet to apply handle
+    key = address & 0xff;
     for (uint8_t i=0; i < count; i++) {
         uint8_t tKey = key | i;
         node->subtree = insert_node(node->subtree, tKey, 0);
