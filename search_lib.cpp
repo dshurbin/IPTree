@@ -45,7 +45,7 @@ void load_tree(char* file_name)
         } else
         if(signature.length()){
             line = line.substr(1);
-            add_ip_address(line, signature, ip_tree::dummy_handler);
+            ip_tree::add_ip_address(line, signature, ip_tree::dummy_handler);
         } 
 
     }
