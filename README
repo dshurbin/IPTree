@@ -13,5 +13,5 @@ in mind that each IP can be handled by various handlers - there may be handlers 
 an exact IP may be handled by multiple functions. F.e. some check ports, some check payload, 
 some check its nature - IP/UDP/ICMP etc.
 every handler has its own unique string (up to 50 characters long), so when adding, we check if we're already here.
-May be it is not the best solution, but this doesn't affect search robustness.
+May be it is not the best solution, but this doesn't affect search speed.
 Anyway - feel free to suggest things to implement.
